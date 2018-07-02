@@ -25,8 +25,8 @@ if(process.env.NODE_ENV !== 'production') require('dotenv').load()
 
 app.use('/auth', require('./routes/auth'))
 app.use('/users', require('./routes/users'))
-app.use('/api/customer', require('./routes/customer'))
-app.use('/api/shop', require('./routes/shop'))
+app.use('/api/museum', require('./routes/museum'))
+// app.use('/api/artist', require('./routes/artist'))
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -41,52 +41,17 @@ app.use((req, res, next) => next({status: 404, message: 'Route not found' }))
 //////////////////////////////////////////////////////////////////////////////
 
 app.use((err, req, res, next) => {
-  const errorMessage = {}
-
-  if(process.env.NODE_ENV !== 'production' && err.stack)
-    errorMessage.stack = err.stack
-
-  errorMessage.status = err.status || 500
-  errorMessage.message = err.message || 'Internal Server Error'
-
-  res.status(errorMessage.status).send(errorMessage)
-})
-
-
-//////////////////////////////////////////////////////////////////////////////
-// Sockets & Serve
-//////////////////////////////////////////////////////////////////////////////
-
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const port = process.env.PORT || 3000
-let clients = []
-
-
-io.on('connection', function(socket){
-  clients.push({
-    socketId:socket.id,
-    token: socket.handshake.query.token
-  })
-  console.log(clients)
-  // console.log(socket.handshake.query.token)
-  socket.on('chat message', function(msg){
-    console.log(msg);
-    const targetClient = clients.find(el => el.token === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTI4Mzg4MzMzfQ.dxZZ-rC-mon4U6QWNCsJ5yrJlQZMqW4dhshl-Pxn6o0')
-    console.log(targetClient)
-    io.sockets.connected[targetClient.socketId || null].emit('chat message response', msg)
-  })
-
-  socket.on('disconnect', function() {
-      clients = clients.filter(client => client.socketId !== socket.id)
-      console.log('Got disconnect!');
-   });
+  console.error(err)
+  const status = err.status || 500
+  res.status(status).json({ error: err })
 })
 
 //////////////////////////////////////////////////////////////////////////////
 // Starting Server
 //////////////////////////////////////////////////////////////////////////////
 
-http.listen(port, () => {console.log(`Listening on port ${port}`)})
+const port = process.env.PORT || 8080
+
+app.listen(port, () => {console.log(`Listening on port ${port}`)})
 
 module.exports = app

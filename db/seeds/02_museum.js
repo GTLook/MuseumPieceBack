@@ -1,0 +1,15 @@
+const TABLE_NAME = 'museum'
+const SHORTID = require('shortid')
+
+exports.seed = function(knex, Promise) {
+  return knex(TABLE_NAME).del()
+    .then(() => {
+      return knex(TABLE_NAME).insert([
+        {id: 1, museum_shortid: SHORTID.generate(), museum_name: 'Van Gogh Museum', museum_address:'Museumplein 6', museum_city:'Amsterdam', museum_state:'Museumplein 6', museum_postalcode:'1071', museum_placeID:'ChIJX1rTlu8JxkcRGsV8-a4oKMI', museum_picture:'https://cdn-imgix.headout.com/tour/6156/TOUR-IMAGE/VanGoghMuseum-1.jpg'},
+        {id: 2, museum_shortid: SHORTID.generate(), museum_name: 'Seattle Art Museum', museum_address:'1300 1st Ave', museum_city:'Seattle', museum_state:'WA', museum_postalcode:'98101', museum_placeID:'ChIJSxh5JbJqkFQRxI1KoO7oZHs', museum_picture:'http://www.seattleartmuseum.org/Assets%20Visit/seattle-art-museum/seattle-art-museum-header-780px.jpg'},
+      ])
+    })
+    .then(() => {
+      return knex.raw(`SELECT setval('${TABLE_NAME}_id_seq', (SELECT MAX(id) FROM ${TABLE_NAME}));`)
+    })
+}

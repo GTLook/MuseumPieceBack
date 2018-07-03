@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       table.increments()
       table.string('artist_shortid').notNullable()
       table.string('artist_name').defaultTo('')
-      table.string('artist_bio').defaultTo('')
+      table.text('artist_bio').defaultTo('')
   })
 };
 

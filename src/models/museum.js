@@ -6,13 +6,13 @@ const db = require('../../db/knex')
 
 const getAll = () => {
   return (
-    db('museums')
+    db('museum')
   )
 }
 
-const getOne = (museumId, reviewId) => {
+const getOne = (museumId ) => {
   return (
-    db('museums')
+    db('museum')
     .where({ museum_id: museumId })
     .returning('*')
   )

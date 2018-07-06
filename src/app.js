@@ -26,6 +26,7 @@ if(process.env.NODE_ENV !== 'production') require('dotenv').load()
 app.use('/auth', require('./routes/auth'))
 app.use('/users', require('./routes/users'))
 app.use('/api/museum', require('./routes/museum'))
+app.use('/api/museum', require('./routes/gallery'))
 // app.use('/api/artist', require('./routes/artist'))
 
 

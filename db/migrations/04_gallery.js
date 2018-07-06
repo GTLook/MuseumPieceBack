@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('gallery_shortid').notNullable()
     table.integer('museum_id').references('museum.id')
     table.integer('artist_id').notNullable().references('artist.id')
+    table.string('gallery_picture').notNullable()
     table.string('gallery_title').notNullable()
     table.text('gallery_text').notNullable().defaultTo('')
   })

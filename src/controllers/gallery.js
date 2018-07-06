@@ -1,20 +1,21 @@
-const dataModel = require('../models/museum')
+const dataModel = require('../models/gallery')
 
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
 
-const getAllMuseums = (req, res, next) => {
-  dataModel.getAllMuseums()
+const getAllGalleries = (req, res, next) => {
+  dataModel.getAllGalleries()
   .then((data) => res.status(200).json({ data }))
   .catch(next)
 }
 
-const getOneMuseum = (req, res, next) => {
-  dataModel.getOneMuseum(req.params.museumId)
+const getOneGallery = (req, res, next) => {
+  dataModel.getOneGallery(req.params.museumId)
   .then((data) => res.status(200).json({ data }))
   .catch(next)
 }
+
 
 // const create = (req, res, next) => {
 //   dataModel.create(req.params.id, req.claim.id, req.body)
@@ -48,4 +49,4 @@ const getOneMuseum = (req, res, next) => {
 //   .catch(next)
 // }
 
-module.exports = { getAllMuseums, getOneMuseum }
+module.exports = { getAllGalleries, getOneGallery }

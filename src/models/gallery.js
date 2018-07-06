@@ -4,36 +4,37 @@ const db = require('../../db/knex')
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
 
-const getAllMuseums = () => {
+const getAllGalleries = () => {
   return (
-    db('museum')
-    .then(museums => {
-        const museumsWithGalleries = museums.map(museum => {
-        return db('gallery')
-          .where({ museum_id: museum.id })
-          .then(gallery => {
-             museum.gallery = gallery
-             return museum
+    db('gallery')
+    .then(gallery => {
+        const galleriesWithArt = gallery.map(gallery => {
+        return db('art')
+          .where({ gallery_id: gallery.id })
+          .then(art => {
+             gallery.art = art
+             return gallery
           })
       })
-      return Promise.all(museumsWithGalleries)
+      return Promise.all(galleriesWithArt)
     })
   )
 }
 
-const getOneMuseum = ( museumId ) => {
+const getOneGallery = ( galleryId ) => {
   return (
-    db('museum')
-    .where({ id: museumId })
-    .then(museum => {
-      const museumWithGallery = museum
-        db('gallery')
-        .where({ museum_id: museum.id })
-        .then(gallery => {
-           museumWithGallery.gallery = gallery
-           return museumWithGallery
+    db('gallery')
+    .where({ id: galleryId })
+    .then(gallery => {
+      const galleryWithArt = gallery.map(gallery => {
+        return db('art')
+        .where({ gallery_id: gallery.id })
+        .then(art => {
+           gallery.art = art
+           return gallery
         })
-        return Promise.all(museumWithGallery)
+      })
+        return Promise.all(galleryWithArt)
     })
   )
 }
@@ -68,4 +69,4 @@ const getOneMuseum = ( museumId ) => {
 // }
 
 
-module.exports = { getAllMuseums, getOneMuseum }
+module.exports = { getAllGalleries, getOneGallery }

@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/museum')
+const controller = require('../controllers/gallery')
 
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
 
-router.get('/', controller.getAllMuseums)
-router.get('/:museumId', controller.getOneMuseum)
+router.get('/:museumId/gallery/', controller.getAllGalleries)
+router.get('/:museumId/gallery/:galleryId', controller.getOneGallery)
 
 // router.post('/', controller.create)
 // router.patch('/:id', controller.patch)

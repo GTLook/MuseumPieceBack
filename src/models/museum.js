@@ -26,12 +26,13 @@ const getOneMuseum = ( museumId ) => {
     db('museum')
     .where({ id: museumId })
     .then(museum => {
-      const museumWithGallery = museum
-        db('gallery')
+        const museumWithGallery = museum.map(museum => {
+        return db('gallery')
         .where({ museum_id: museum.id })
         .then(gallery => {
-           museumWithGallery.gallery = gallery
-           return museumWithGallery
+           museum.gallery = gallery
+           return museum
+         })
         })
         return Promise.all(museumWithGallery)
     })

@@ -2,10 +2,9 @@
 
 This is the backend of the project. 
 The front ends can be found at:
-* https://github.com/gEightyTwo/coffeeshop-frontend-customer
-* https://github.com/gEightyTwo/coffeeshop-frontend-store
+* https://github.com/GTLook/MuseumPiece
 
-CoffeeShop is a coffee ordering web application.  It allows users to create a profile, log in, and order custom coffee drinks.  The app utilizes the Google API location codes to find the nearest coffee shops and walking distance to the shop.  Users can craft their drink order and set the time they want to pick up their drinks for a delay up to 30 minutes.  Coffee shop owners can receive incoming orders, sorted by pickup time, and fulfill orders.
+Museum Piece is a mobile first react applicaiton. It is designed to enhance user experince at museums! It uses image recognition and audio tours to let the users pick their own path through the museum. Users can view art information and listen to the cusomized audio tour. Current gallery is seeded for Van Gouh museum - permenant collection for testing.
 
 ## Getting Started
 
@@ -17,17 +16,22 @@ What things you need to install the software and how to install them
 
 ```shell
 * fork and clone this repository
-* run npm install
 ```
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running to utilize the postgress db
 
+Install the Node dependencies:
+
+```shell
+* run npm install
+```
+
 Create the development database:
 
 ```shell
-* createdb coffee_base
+* createdb museum_base
 ```
 
 and run migrations and seeds:
@@ -37,10 +41,10 @@ and run migrations and seeds:
 * npm run knex seed:run
 ```
 
-Finally, start the server:
+Finally, start the server in developement mode:
 
 ```shell
-* npm start
+* npm run dev
 ```
 
 Check that you can GET the `/api/customer/shops` endpoint.  If you receive a 200 from the server your up and running.
@@ -59,7 +63,6 @@ This project has been deployed on Heroku at the address: https://dashboard.herok
 * [postgreSQL](https://www.postgresql.org/) - database
 * [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
 * [Node](https://nodejs.org/en/) - Package ecosystem
-* [Sockets](https://sockets.io) - Sockets system
 
 
 ## Contributing
@@ -68,7 +71,6 @@ Please send either of the developers a message for details on our code of conduc
 
 ## Authors
 
-* **Mark Pavlovski** - *Initial work* - [mrkpvlvski](https://github.com/mrkpvlvski)
 * **Gavin Look** - *Initial work* - [GTLook](https://github.com/GTLook/)
 
 ## License

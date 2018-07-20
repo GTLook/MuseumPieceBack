@@ -1,14 +1,15 @@
 const db = require('../../db/knex')
 const bcrypt = require('bcrypt-as-promised')
+const SHORTID = require('shortid')
 
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
 
-function getOneByEmail(email){
+function getOneByEmail(user_email){
   return (
     db('users')
-    .where({ email })
+    .where({ user_email })
     .first()
   )
 }
@@ -24,7 +25,7 @@ function getOneById(id){
 function getAll(){
   return (
     db('users')
-    .select('id','first_name','last_name','picture')
+    .select('id','user_first_name','user_last_name')
   )
 }
 
@@ -39,24 +40,24 @@ function getAll(){
 // 5. "return/continue" promise
 //////////////////////////////////////////////////////////////////////////////
 
-function create({email, password, first_name, last_name, picture}){
+function create({user_email, user_password, user_first_name, user_last_name}){
   // check to see of user already exists
-  return getOneByEmail(email)
+  return getOneByEmail(user_email)
   .then(function(data){
     // if user already exists, return 400
     if(data) throw { status: 400, message:'User already exists'}
 
     // hash password
-    return bcrypt.hash(password, 10)
+    return bcrypt.hash(user_password, 10)
   })
   .then(function(hashedPassword){
 
-    picture = picture ? picture : 'http://www.placecage.com/50/50'
+    //picture = picture ? picture : 'http://www.placekitten.com/50/50'
 
     // 3. Insert record into database
     return (
       db('users')
-      .insert({ email, hashed_password: hashedPassword, first_name, last_name, picture})
+      .insert({ user_email, user_shortid:SHORTID.generate(), user_hashed_password: hashedPassword, user_first_name, user_last_name })
       .returning('*')
     )
   })

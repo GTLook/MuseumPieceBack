@@ -5,16 +5,16 @@ const userModel = require('../models/users')
 //////////////////////////////////////////////////////////////////////////////
 
 function create(req, res, next){
-  if(!req.body.email){
+  if(!req.body.user_email){
     return next({ status: 400, message: 'Bad email'})
   }
-  if(!req.body.password){
+  if(!req.body.user_password){
     return next({ status: 400, message: 'Bad password'})
   }
-  if(!req.body.first_name){
+  if(!req.body.user_first_name){
     return next({ status: 400, message: 'Include First Name'})
   }
-  if(!req.body.last_name){
+  if(!req.body.user_last_name){
     return next({ status: 400, message: 'Include Last Name'})
   }
 
@@ -26,7 +26,7 @@ function create(req, res, next){
 }
 
 const getAll = (req, res, next) => {
-  userModel.getAll()  
+  userModel.getAll()
   .then((data) => res.status(200).json({ data }))
   .catch(next)
 }

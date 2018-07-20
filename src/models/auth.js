@@ -29,7 +29,7 @@ function login(email, password){
     user = data
 
     // 2. compare password in the database with the password provided by user
-    return bcrypt.compare(password, data['hashed_password'])
+    return bcrypt.compare(password, data['user_hashed_password'])
   })
   .catch(bcrypt.MISMATCH_ERROR, function(){
     // 3. If the passwords do not match, respond with 401 Unauthorized

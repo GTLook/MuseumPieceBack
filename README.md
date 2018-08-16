@@ -1,6 +1,6 @@
 # Museum Piece (Backend)
 
-This is the backend of the project. 
+This is the backend of the project.
 The front ends can be found at:
 * https://github.com/GTLook/MuseumPiece
 
@@ -75,10 +75,9 @@ Please send either of the developers a message for details on our code of conduc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
 * Inspiration
 * etc

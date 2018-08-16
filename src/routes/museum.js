@@ -9,8 +9,4 @@ const controller = require('../controllers/museum')
 router.get('/', controller.getAllMuseums)
 router.get('/:museumId', controller.getOneMuseum)
 
-// router.post('/', controller.create)
-// router.patch('/:id', controller.patch)
-// router.delete('/:id', controller.delete)
-
 module.exports = router
